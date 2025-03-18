@@ -264,3 +264,57 @@ RAND()
 -- calling the func
 select current_date_func() AS "CURRENT_DATE";
 
+-- ER DIAGRAM
+/*
+product		M:1		category 
+   category_id
+ 
+ 
+customer		category    		
+ 
+ 
+PO(Product Owner)     ----> Client
+1. Customer buying product
+ 
+-- is customer allowed to buy multiple products YES(1:M)   NO(1:1)
+ 
+product bought by customer
+ 
+-- can a product be bought by multiple customers
+Apple iPhone SE (10)
+ 
+NO(1:1)      YES(1:M)
+ 
+ 
+customer ---1:M----  product   
+customer----M:1----  product	
+	    M:M 	
+----------------------------
+	customer_product 
+	customer_id,product_id
+ 
+ 
+Vendor sells the product.
+ 
+---> can a vendor select multiple products?????
+	vendor(1) --- (M)product
+ 
+---> can a product be sold by many vendors 
+	product(1) --- (1)vendor 
+	oppo CE3 (50)
+ 
+vendor - product
+1:M
+product - vendor 
+1:1
+1:M
+product  vendor_id
+To create a foreign key, take the PK of relation that is towards 1 and add it to other table as foreign key
+review  product,customer
+review  	1:1	product	
+product		1:M	review   : review(product_id)
+ 
+review  	1:1	customer	
+customer	1:M	review  : review(cstomer_id)
+*/
+
