@@ -8,9 +8,10 @@ import com.javamarchhex.main.repository.EmployeeRepository;
 
 public class EmployeeService {
 
+	EmployeeRepository employeerepository = new EmployeeRepository();// For global access
 	public List<Employee> getEmployees()
 	{
-		EmployeeRepository employeerepository = new EmployeeRepository();
+		
 		return employeerepository.getEmployeeList();
 	}
 	
@@ -36,6 +37,15 @@ public class EmployeeService {
 		return empList.parallelStream()
 					.filter(e->e.getDepartment().equalsIgnoreCase(idepartment))
 					.toList(); 
+	}
+
+	// We are creating this method to invoke the Repository for the SQL Operations
+	
+	public void addEmployee(Employee employee) 
+	{
+		employeerepository.addEmployee(employee);
+		
+		
 	}
 
 	

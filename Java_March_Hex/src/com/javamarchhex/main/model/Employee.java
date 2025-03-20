@@ -10,6 +10,7 @@ public class Employee
 	private String branch;
 	private String department;
 	private double salary;
+	private Address address;
 	
 	public Employee() // this is the default constructor
 	{
@@ -34,6 +35,16 @@ public class Employee
 		this.branch = branch;
 		this.department = department;
 		this.salary = salary;
+	}
+	public Employee(int empid, String empname, String branch, String department, 
+			double salary, Address address) {
+		super();
+		this.empid = empid;
+		this.empname = empname;
+		this.branch = branch;
+		this.department = department;
+		this.salary = salary;
+		this.address = address;
 	}
 
 	public int getEmpid() {
@@ -72,16 +83,22 @@ public class Employee
 		return salary;
 	}
 
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
 	public void setSalary(double salary) {
 		this.salary = salary;
 	}
 
 	@Override
-	public String toString() // This is used for the value showing when the data is to be diplay
-	// if we are not using this tostring method it only diplays the address of the value
-	{
+	public String toString() {
 		return "Employee [empid=" + empid + ", empname=" + empname + ", branch=" + branch + ", department=" + department
-				+ ", salary=" + salary + "]";
+				+ ", salary=" + salary + ", address=" + address + "]";
 	}
 
 }
