@@ -1,10 +1,13 @@
 package com.javamarchhex.main.services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Stream;
 
 import com.javamarchhex.main.model.Employee;
+import com.javamarchhex.main.model.EmployeeProject;
 import com.javamarchhex.main.repository.EmployeeRepository;
+import com.javamarchhex.main.utility.IdUtil;
 
 public class EmployeeService {
 
@@ -45,6 +48,16 @@ public class EmployeeService {
 	{
 		employeerepository.addEmployee(employee);
 		
+		
+	}
+
+	public void assignProject(int empId, int projectId) {
+		int id  = new IdUtil().getRandomId(); 
+		EmployeeProject employeeProject = new EmployeeProject();
+		employeeProject.setId(id);
+		employeeProject.setDateOfAssign(LocalDate.now());
+		
+		employeerepository.assignProject(employeeProject,empId,projectId);
 		
 	}
 

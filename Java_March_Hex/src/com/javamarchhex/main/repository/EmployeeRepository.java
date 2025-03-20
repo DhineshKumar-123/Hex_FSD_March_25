@@ -10,40 +10,32 @@ import java.util.List;
 
 import com.javamarchhex.main.model.Address;
 import com.javamarchhex.main.model.Employee;
+import com.javamarchhex.main.model.EmployeeProject;
 
 public class EmployeeRepository 
-{
-	private String userdb  = "root";
-	private String password = "";
-	private String url = "jdbc:mysql://localhost:3306/march_java";
-	private String driver ="com.mysql.cj.jdbc.Driver";
-	
-	Connection con;
+{	
+	private String userDb="root";
+	private String dbPass="";
+	private String url="jdbc:mysql://localhost:3306/march_java";
+	private String driver = "com.mysql.cj.jdbc.Driver";
+	Connection con; 
 	
 	List<Employee> empList = new ArrayList<>();// we are declaring this list outside the method for the access of this in another method
 	
-	
-	public void dbConnect() 
-	{
+	public void dbConnect() {
 		/*Step 1: Load the driver */
-		try 
-		{
+		try {
 			Class.forName(driver);
-//			System.out.println("DRIVER LOADED SUCCESSFULLY !!!!");
-		}
-		catch (ClassNotFoundException e) 
-		{
+			//System.out.println("DRIVER LOADED!!!!");
+		} catch (ClassNotFoundException e) {
 			System.out.println("DRIVER LOADING FAILED!!!!");
 		}
 		/* Step 2: Establish connection */
-		try 
-		{
-			con = DriverManager.getConnection(url, userdb, password);
-//			System.out.println("CONNECTION ESTABLISHED SUCCESSFULLY...");
-		} 
-		catch (SQLException e) 
-		{
-			System.out.println("CONNECTION HAS ISSUE...");
+		try {
+			con = DriverManager.getConnection(url, userDb, dbPass);
+			//System.out.println("CONNECTION ESTABLISHED...");
+		} catch (SQLException e) {
+			System.out.println("CONNECTION iSSUE...");
 		}
 	}
 	
@@ -51,13 +43,11 @@ public class EmployeeRepository
 		/* Close the connection*/
 		try {
 			con.close();
-			System.out.println("CONNECTION CLOSED...");
+			//System.out.println("connection closed...");
 		} catch (SQLException e) {
 			 System.out.println(e.getMessage());	
 		}
 	}
-	
-	
 	
 	
 	public void populateRecords()
@@ -170,4 +160,24 @@ public class EmployeeRepository
 		dbClose();
 	}
 
-}
+	public void assignProject(EmployeeProject employeeProject, int empId, int projectId) {
+		dbConnect();
+		String sql="insert into employee_project values (?,?,?,?)";
+		
+		PreparedStatement pstmt;
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, employeeProject.getId());
+			pstmt.setInt(2, empId);
+			pstmt.setInt(3, projectId);
+			//convert date to string as it is varchar in DB
+			pstmt.setString(4, employeeProject.getDateOfAssign().toString()); 
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		dbClose();
+	}
+		
+	}
+

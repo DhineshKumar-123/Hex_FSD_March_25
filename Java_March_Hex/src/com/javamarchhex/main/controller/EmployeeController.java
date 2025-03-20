@@ -9,6 +9,7 @@ import com.javamarchhex.main.services.EmployeeService;
 
 public class EmployeeController 
 {
+	Scanner sc = new Scanner(System.in);
 	EmployeeService employeeservice = new EmployeeService();// to access it in all methods and it is main to implement the 
 	// db operations in repository
 	public void displayEmployeeRecord()
@@ -42,7 +43,7 @@ public class EmployeeController
 	public void addEmployee() 
 	{
 		/*Take input from User */
-		Scanner sc = new Scanner(System.in);
+		
 		System.out.println("Enter name");
 		String name = sc.next();
 		System.out.println("Enter branch");
@@ -80,5 +81,13 @@ public class EmployeeController
 		// So we are calling the addEmployee Method present inside the EmployeeService Class with EmployeeService Object
 		
 		employeeservice.addEmployee(employee);
+	}
+	public void assignProject() {
+		 System.out.println("Enter employee id");
+		 int empId = sc.nextInt();
+		 System.out.println("Enter project id");
+		 int projectId = sc.nextInt();
+		 
+		 employeeservice.assignProject(empId,projectId);
 	}
 }
