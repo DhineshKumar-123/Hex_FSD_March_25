@@ -6,13 +6,21 @@ import java.sql.SQLException;
 
 public class DbUtil 
 {
+	static DbUtil dbUtil;
+	static {
+		dbUtil = new DbUtil();
+	}
+	public static DbUtil getInstance()
+	{
+		return dbUtil;
+	}
 
-	private String userdb  = "root";
-	private String password = "";
+	private final String userdb  = "root";
+	private final String password = "";
 	private String url = "jdbc:mysql://localhost:3306/march_java";
-	private String driver ="com.mysql.cj.jdbc.Driver";
+	private final String driver ="com.mysql.cj.jdbc.Driver";
 	
-	Connection con;
+	private Connection con;
 	
 	public Connection dbConnect() 
 	{

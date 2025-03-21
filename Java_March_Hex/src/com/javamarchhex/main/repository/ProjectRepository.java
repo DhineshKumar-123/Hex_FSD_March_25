@@ -12,10 +12,10 @@ import com.javamarchhex.main.utility.DbUtil;
 
 public class ProjectRepository
 {
-	DbUtil dbUtil = new DbUtil();
+//	DbUtil dbUtil = new DbUtil();
 
 	public List<Project> fetchAllProjects() {
-		Connection con = dbUtil.dbConnect();
+		Connection con = DbUtil.getInstance().dbConnect();
 		String sql="select * from project";
 		List<Project> list = new ArrayList<>();
 		try {
@@ -29,13 +29,13 @@ public class ProjectRepository
 				list.add(project);
 				
 			}
-			dbUtil.dbClose();
+			DbUtil.getInstance().dbClose();
 			return list; 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		dbUtil.dbClose();
+		DbUtil.getInstance().dbClose();
 		return null;
 	}
 

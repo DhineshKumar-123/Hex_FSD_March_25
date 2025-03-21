@@ -72,8 +72,9 @@ public class MainApp {
 				break;
 				
 			case 5:
-				//Returns the list of projects which are assigned to the given empid
-				//The empid was get from user in the Controller itself
+				/*Returns the list of projects which are assigned to the given empid
+				The empid was get from user in the Controller itself
+				*/
 				List<Project> pList = employeecontroller.getProjectsByEmployeeId();//Calling controller method
 				if(pList!=null)//checks whether returning object is null or not
 					//THis is to read each values in the object and then print it 
