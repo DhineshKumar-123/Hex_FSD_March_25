@@ -5,9 +5,10 @@ import java.time.LocalDate;
 public class EmployeeProject {
 	private int id; 
 	private LocalDate dateOfAssign; 
-	
 	private Employee employee;
 	private Project project;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -32,6 +33,7 @@ public class EmployeeProject {
 	public void setProject(Project project) {
 		this.project = project;
 	}
+	
 	@Override
 	public String toString() {
 		return "EmployeeProject [id=" + id + ", dateOfAssign=" + dateOfAssign + ", employee=" + employee + ", project="

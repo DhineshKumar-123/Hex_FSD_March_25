@@ -3,8 +3,10 @@ package com.javamarchhex.main.controller;
 import java.util.List;
 import java.util.Scanner;
 
+import com.javamarchhex.main.exception.InvalidIdException;
 import com.javamarchhex.main.model.Address;
 import com.javamarchhex.main.model.Employee;
+import com.javamarchhex.main.model.Project;
 import com.javamarchhex.main.services.EmployeeService;
 
 public class EmployeeController 
@@ -89,5 +91,23 @@ public class EmployeeController
 		 int projectId = sc.nextInt();
 		 
 		 employeeservice.assignProject(empId,projectId);
+	}
+	public List<Project> getProjectsByEmployeeId() 
+	{
+		System.out.println("Enter the Employee Id: ");
+		int eid = sc.nextInt();
+		
+		try {
+			//check the status of empid which is given by the user is present or not in db
+			Employee employee =   employeeservice.getEmployeeById(eid);
+			return employeeservice.getProjectsByEmployeeId(employee.getEmpid());
+		} //IF not present show the error message
+		catch (InvalidIdException e) //This is user defined exception
+		{
+			 System.out.println(e.getMessage());
+			 return null; 
+		} 
+
+//		return null;
 	}
 }

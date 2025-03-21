@@ -2,10 +2,13 @@ package com.javamarchhex.main.services;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
+import com.javamarchhex.main.exception.InvalidIdException;
 import com.javamarchhex.main.model.Employee;
 import com.javamarchhex.main.model.EmployeeProject;
+import com.javamarchhex.main.model.Project;
 import com.javamarchhex.main.repository.EmployeeRepository;
 import com.javamarchhex.main.utility.IdUtil;
 
@@ -59,6 +62,19 @@ public class EmployeeService {
 		
 		employeerepository.assignProject(employeeProject,empId,projectId);
 		
+	}
+
+	public Employee getEmployeeById(int eid) throws InvalidIdException {
+		Optional<Employee> optional =  employeerepository.getEmployeeById(eid); 
+		if(optional.isEmpty())
+			throw new InvalidIdException("Employee ID invalid..."); 
+		
+		Employee employee = optional.get();
+		return employee;
+	}
+
+	public List<Project> getProjectsByEmployeeId(int eid) {
+		return employeerepository.getProjectsByEmployeeId(eid);
 	}
 
 	

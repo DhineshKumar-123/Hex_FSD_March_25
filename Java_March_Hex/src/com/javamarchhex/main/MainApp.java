@@ -1,9 +1,11 @@
 package com.javamarchhex.main;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.javamarchhex.main.controller.EmployeeController;
 import com.javamarchhex.main.controller.ProjectController;
+import com.javamarchhex.main.model.Project;
 
 
 
@@ -21,7 +23,7 @@ public class MainApp {
 			System.out.println("2. Filter by branch,department");
 			System.out.println("3. Add Employee with Address");
 			System.out.println("4. Assign Project to Employee");
-			System.out.println("5. djdflkEmployee");
+			System.out.println("5. Fetch Project for Employee");
 			System.out.println("0. To Exit");
 			int input = sc.nextInt();
 			if(input ==0) {
@@ -68,6 +70,16 @@ public class MainApp {
 				employeecontroller.assignProject();
 				System.out.println("Project assigned to employee..");
 				break;
+				
+			case 5:
+				//Returns the list of projects which are assigned to the given empid
+				//The empid was get from user in the Controller itself
+				List<Project> pList = employeecontroller.getProjectsByEmployeeId();//Calling controller method
+				if(pList!=null)//checks whether returning object is null or not
+					//THis is to read each values in the object and then print it 
+					pList.stream().forEach(p->System.out.println(p));
+				break;
+				
 			}
 		}
 		sc.close();

@@ -10,7 +10,7 @@ public class Employee
 	private String branch;
 	private String department;
 	private double salary;
-	private Address address;
+	private Address address;// This is a refernece and foreign key present in eployee table
 	
 	public Employee() // this is the default constructor
 	{

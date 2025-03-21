@@ -23,6 +23,13 @@ public class Project
 	}
 
 
+	public Project(String title, int credits) {
+		super();
+		this.title = title;
+		this.credits = credits;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Project [id=" + id + ", title=" + title + ", credits=" + credits + "]";

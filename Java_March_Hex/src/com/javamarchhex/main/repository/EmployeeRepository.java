@@ -7,10 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.javamarchhex.main.model.Address;
 import com.javamarchhex.main.model.Employee;
 import com.javamarchhex.main.model.EmployeeProject;
+import com.javamarchhex.main.model.Project;
 
 public class EmployeeRepository 
 {	
@@ -76,7 +78,7 @@ public class EmployeeRepository
 		dbConnect(); // connection started
 		
 		String sql = "select * from employeedetail e join address a on e.address_id = a.id ";
-		List<Employee> list = new ArrayList();// For storing the values that are get from the result set and it was come from the object
+		List<Employee> list = new ArrayList<>();// For storing the values that are get from the result set and it was come from the object
 		
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);//preparing the sql statement for implementing
@@ -178,6 +180,64 @@ public class EmployeeRepository
 		}
 		dbClose();
 	}
-		
+	public Optional<Employee> getEmployeeById(int eid) {
+		dbConnect();
+		String sql="select * from employeedetail where empid=?";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, eid);
+			
+			ResultSet rst = pstmt.executeQuery();
+			if(rst.next()) {
+				int id = rst.getInt("empid");
+				String name = rst.getString("emp_name");
+				String branch = rst.getString("branch");
+				String department = rst.getString("department");
+				double salary = rst.getDouble("salary");
+				
+				Employee e = new Employee(
+						id,
+						name,
+						branch,
+						department,
+						salary);
+				dbClose();
+				return Optional.of(e); 
+			}
+			 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		dbClose();
+		return Optional.ofNullable(null);
 	}
+
+	public List<Project> getProjectsByEmployeeId(int eid) {
+		dbConnect();
+		 String sql="select p.* "
+		 		+ " from employeedetail e JOIN employee_project ep ON e.empid = ep.employee_id"
+		 		+ " JOIN project p ON ep.project_id = p.id"
+		 		+ " where e.empid=?";
+		 List<Project> list = new ArrayList<>();
+		 try {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, eid);
+			
+			ResultSet rst = pstmt.executeQuery();
+			while(rst.next()) {
+				Project project = new Project(
+						 rst.getInt("id"),
+						 rst.getString("title"),
+						 rst.getInt("credits"));
+				list.add(project);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		 dbClose();
+		return list;
+	}
+}
+		
+
 

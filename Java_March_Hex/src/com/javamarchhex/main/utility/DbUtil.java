@@ -43,7 +43,7 @@ public class DbUtil
 		/* Close the connection*/
 		try {
 			con.close();
-			System.out.println("CONNECTION CLOSED...");
+//			System.out.println("CONNECTION CLOSED...");
 		} catch (SQLException e) {
 			 System.out.println(e.getMessage());	
 		}
