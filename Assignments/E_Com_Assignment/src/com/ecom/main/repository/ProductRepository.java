@@ -20,7 +20,7 @@ public class ProductRepository {
 			pstmt.setInt(3, product.getQuantity());
 			pstmt.setInt(4, product.getCate_id());
 			pstmt.executeUpdate();
-			System.out.println("Inserted Successfully to DB");
+			System.out.println("Product Inserted Successfully to DB");
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

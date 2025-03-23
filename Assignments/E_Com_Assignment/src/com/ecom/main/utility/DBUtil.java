@@ -27,7 +27,7 @@ public class DBUtil
 		try 
 		{
 			Class.forName(driver);//For driver Loading
-			System.out.println("Driver Loaded");
+//			System.out.println("Driver Loaded");
 		} 
 		catch (ClassNotFoundException e) 
 		{
@@ -38,7 +38,7 @@ public class DBUtil
 		try 
 		{
 			conn = DriverManager.getConnection(url,userdb,password);
-			System.out.println("Connected to DB");
+//			System.out.println("Connected to DB");
 		} 
 		catch (SQLException e) 
 		{
