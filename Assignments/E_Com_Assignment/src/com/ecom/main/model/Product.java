@@ -7,6 +7,7 @@ public class Product
 	private double price;
 	private int quantity;
 	private int cate_id;
+	
 	public Product() {
 		super();
 		// TODO Auto-generated constructor stub

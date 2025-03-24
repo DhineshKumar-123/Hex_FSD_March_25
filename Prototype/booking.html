@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hotel Booking</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .hotel-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">AgodaClone</a>
+        </div>
+    </nav>
+
+    <!-- Booking Form -->
+    <div class="container mt-5">
+        <h1 class="fw-bold text-center">Book Your Stay</h1>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <img id="hotel-image" class="hotel-image" alt="Hotel Image">
+                <h3 id="hotel-name" class="fw-bold mt-3"></h3>
+                <p id="hotel-description"></p>
+                <h4 id="hotel-price" class="text-primary"></h4>
+            </div>
+            
+            <div class="col-md-6">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Check-in Date</label>
+                        <input type="date" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Check-out Date</label>
+                        <input type="date" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Number of Guests</label>
+                        <input type="number" class="form-control" min="1" required>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Confirm Booking</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get hotel ID from URL
+        const params = new URLSearchParams(window.location.search);
+        const hotelId = params.get("hotel");
+
+        // Fetch hotel details from the same object used in details.html
+        const hotels = {
+            "hotel1": { name: "Luxury Beach Resort", image: "images/hotel1.jpg", description: "A luxurious beach resort with stunning ocean views and world-class amenities.", price: "$150 per night" },
+            "hotel2": { name: "City View Hotel", image: "images/hotel2.jpg", description: "A modern hotel in the heart of the city with breathtaking skyline views.", price: "$120 per night" },
+            "hotel3": { name: "Mountain Escape Lodge", image: "images/hotel3.jpg", description: "A peaceful retreat in the mountains, perfect for nature lovers and adventurers.", price: "$180 per night" },
+            "hotel4": { name: "Seaside Paradise Hotel", image: "images/hotel4.jpg", description: "A beachfront paradise with premium rooms and private beach access.", price: "$140 per night" },
+            "hotel5": { name: "Grand Royal Palace", image: "images/hotel5.jpg", description: "An elegant hotel with royal decor and luxurious hospitality services.", price: "$220 per night" },
+            "hotel6": { name: "Downtown Business Suites", image: "images/hotel6.jpg", description: "Ideal for business travelers, offering modern rooms and conference facilities.", price: "$110 per night" }
+        };
+
+        // Populate booking page with hotel details
+        if (hotels[hotelId]) {
+            document.getElementById("hotel-name").textContent = hotels[hotelId].name;
+            document.getElementById("hotel-image").src = hotels[hotelId].image;
+            document.getElementById("hotel-description").textContent = hotels[hotelId].description;
+            document.getElementById("hotel-price").textContent = hotels[hotelId].price;
+        }
+    </script>
+
+</body>
+</html>

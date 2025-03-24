@@ -11,14 +11,17 @@ public class ProductController
 	public void addProduct() 
 	{
 		System.out.println("Enter Product Name: ");
-		String productname = sc.next();
+		String productname = sc.nextLine();
 		System.out.println("Enter Product Price: ");
 		double productprice = sc.nextDouble();
 		System.out.println("Enter the Product Quantity: ");
 		int productquantity = sc.nextInt();
+		
 		CategoryController categoryController = new CategoryController();
 		categoryController.getCategories();
+		
 		System.out.println("Choose and Enter the Category ID of your Product: ");
+		System.out.println("If Not find appropriate category just create it!!!!");//
 		int categoryid = sc.nextInt();
 		System.out.println("Inputs are Got Successfully from Cotroller!!");
 		
