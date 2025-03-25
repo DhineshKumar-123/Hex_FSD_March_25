@@ -5,7 +5,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import com.springcoreapp.main.config.AppConfig;
 import com.springcoreapp.main.util.DbUtil;
-import com.springcoreapp.main.utility.MyUtil;
+import com.springcoreapp.main.util.MyUtil;
 
 public class App {
 

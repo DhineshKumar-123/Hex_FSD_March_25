@@ -1,4 +1,4 @@
-package com.springcoreapp.main.utility;
+package com.springcoreapp.main.util;
 
 public class MyUtil 
 {

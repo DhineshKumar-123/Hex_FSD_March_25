@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.springcoreapp.main.util.DbUtil;
-import com.springcoreapp.main.utility.MyUtil;
+import com.springcoreapp.main.util.MyUtil;
 
 @Configuration
 public class AppConfig //This file is to manage the object creation in a single memory location
