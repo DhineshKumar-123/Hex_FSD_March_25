@@ -1,0 +1,6 @@
+spring vl manage the object if u take it from the context. 
+ 
+and when that happens it will make sure that it does not lock the object locations 
+ 
+it may choose to give u same location each time u ask for object making ur class singleton 
+ 
