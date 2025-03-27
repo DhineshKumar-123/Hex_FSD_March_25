@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel DSS - Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
+    <style>
+        /* Dynamic Animated Gradient Background */
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background: linear-gradient(-45deg, #ff416c, #ff4b2b, #1f4037, #99f2c8);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Glassmorphism Effect */
+        .auth-container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
+            width: 420px;
+            text-align: center;
+            transition: transform 0.5s ease-in-out;
+        }
+        .auth-container:hover {
+            transform: scale(1.05);
+        }
+        .auth-container h3 {
+            font-weight: bold;
+            color: white;
+        }
+        .toggle-link {
+            color: #ffdd57;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .form-container {
+            display: none;
+        }
+        .form-container.active {
+            display: block;
+            animation: fadeSlide 0.8s ease-in-out;
+        }
+
+        /* Particle Effect */
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+            from { transform: translateY(100vh) scale(1); opacity: 1; }
+            to { transform: translateY(-10vh) scale(0.5); opacity: 0; }
+        }
+
+        /* Button Effects */
+        .btn-primary {
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            border: none;
+            transition: 0.3s;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #ff4b2b, #ff416c);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Particle Effect -->
+    <script>
+        for (let i = 0; i < 30; i++) {
+            let particle = document.createElement("div");
+            particle.classList.add("particle");
+            document.body.appendChild(particle);
+            particle.style.left = Math.random() * 100 + "vw";
+            particle.style.animationDuration = Math.random() * 5 + 3 + "s";
+            particle.style.animationDelay = Math.random() * 2 + "s";
+        }
+    </script>
+
+    <div class="auth-container">
+        <!-- 3D Cartoon Animation -->
+        <div id="animationContainer" class="lottie-animation"></div>
+
+        <!-- LOGIN FORM -->
+        <div id="loginForm" class="form-container active">
+            <h3>Welcome Back! 👋</h3>
+            <form>
+                <div class="mb-3">
+                    <input type="email" class="form-control" placeholder="Email" >
+                </div>
+                <div class="mb-3">
+                    <input type="password" class="form-control" placeholder="Password" >
+                </div>
+                <a type="submit" class="btn btn-primary w-100" href="dashboard.html">Login</a>
+            </form>
+            <p class="mt-3">Forgot password? <span class="toggle-link" onclick="switchForm('forgotPasswordForm')">Reset Here</span></p>
+            <p>New here? <span class="toggle-link" onclick="switchForm('signupForm')">Sign Up</span></p>
+        </div>
+
+        <!-- SIGNUP FORM -->
+        <div id="signupForm" class="form-container">
+            <h3>Join Us Today! 🚀</h3>
+            <form>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Full Name">
+                </div>
+                <div class="mb-3">
+                    <input type="email" class="form-control" placeholder="Email">
+                </div>
+                <div class="mb-3">
+                    <input type="password" class="form-control" placeholder="Password" >
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+            </form>
+            <p class="mt-3">Already have an account? <span class="toggle-link" onclick="switchForm('loginForm')">Login</span></p>
+        </div>
+
+        <!-- FORGOT PASSWORD FORM -->
+        <div id="forgotPasswordForm" class="form-container">
+            <h3>Reset Your Password 🔑</h3>
+            <form>
+                <div class="mb-3">
+                    <input type="email" class="form-control" placeholder="Enter your email" >
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Send Reset Link</button>
+            </form>
+            <p class="mt-3">Back to Login? <span class="toggle-link" onclick="switchForm('loginForm')">Click Here</span></p>
+        </div>
+    </div>
+
+    <script>
+        function switchForm(formId) {
+            document.querySelectorAll('.form-container').forEach(form => form.classList.remove('active'));
+            document.getElementById(formId).classList.add('active');
+        }
+
+        // Lottie Animation
+        var animation = lottie.loadAnimation({
+            container: document.getElementById('animationContainer'),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: 'https://assets2.lottiefiles.com/packages/lf20_jcikwtux.json' // 3D cartoon animation
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

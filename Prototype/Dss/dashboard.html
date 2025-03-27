@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking DSS Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            color: #333;
+        }
+        .sidebar {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #343a40;
+            padding-top: 20px;
+        }
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+        }
+        .sidebar a:hover {
+            background-color: #495057;
+        }
+        .content {
+            margin-left: 260px;
+            padding: 20px;
+        }
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .profile-img:hover {
+            transform: scale(1.1);
+        }
+        .executive-card {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            width: 250px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            text-align: center;
+            z-index: 1050;
+        }
+        .executive-card img {
+            width: 80px;
+            border-radius: 50%;
+        }
+        .executive-card h5 {
+            margin-top: 10px;
+        }
+        .executive-card p {
+            font-size: 14px;
+            color: gray;
+        }
+        .executive-card.show {
+            display: block;
+        }
+        .logout-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .logout-btn:hover {
+            background: #b02a37;
+        }
+        .sidebar a:hover {
+            background-color: #495057;
+            transform: scale(1.1);
+        }
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: all 0.3s;
+        }
+        .sidebar {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #343a40;
+            padding-top: 20px;
+            transition: all 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h4 class="text-center text-light">🏨 Hotel DSS</h4>
+        <a href="dashboard.html">📊 Dashboard</a>
+        <a href="booking.html">🏨 Bookings</a>
+        <a href="revenue.html">💰 Revenue & Pricing</a>
+        <a href="customerinsights.html">👥 Customer Insights</a>
+        <a href="#">📅 Occupancy Forecasting</a>
+        <a href="#">📌 Competitor Analysis</a>
+        <a href="reports.html">📈 Reports</a>
+        <a href="#">⚙️ Settings</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Navbar -->
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid d-flex justify-content-between align-items-center">
+                <h3>📊 Dashboard</h3>
+                <div class="d-flex align-items-center">
+                    <img src="https://i.pravatar.cc/100" alt="Executive" class="profile-img" onclick="toggleExecutiveCard()">
+                </div>
+            </div>
+        </nav>
+
+        <!-- Executive Details Card -->
+        <div id="executiveCard" class="executive-card">
+            <img src="https://i.pravatar.cc/100" alt="Executive">
+            <h5>John Doe</h5>
+            <p>Chief Revenue Officer</p>
+            <p>Email: john.doe@example.com</p>
+            <p>Phone: +123 456 7890</p>
+            <button class="logout-btn" onclick="logout()">🚪 Log Out</button>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <div class="card text-white bg-primary mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Revenue</h5>
+                        <p class="card-text">$50,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-success mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Occupancy Rate</h5>
+                        <p class="card-text">85%</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-warning mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Average Daily Rate</h5>
+                        <p class="card-text">$150</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-danger mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Customer Satisfaction</h5>
+                        <p class="card-text">4.5⭐</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Revenue Trend</h5>
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Booking Trends</h5>
+                        <canvas id="bookingChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ChartJS Script -->
+    <script>
+        gsap.from(".sidebar", {duration: 1, x: -200, opacity: 0, ease: "power3.out"});
+        function toggleExecutiveCard() {
+            const card = document.getElementById('executiveCard');
+            card.classList.toggle('show');
+        }
+
+        function logout() {
+            alert("Logging out...");
+            window.location.href = "login.html";
+        }
+
+        // Revenue Chart
+        var ctx1 = document.getElementById('revenueChart').getContext('2d');
+        var revenueChart = new Chart(ctx1, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                datasets: [{
+                    label: 'Revenue ($)',
+                    data: [10000, 15000, 20000, 25000, 30000],
+                    borderColor: 'blue',
+                    fill: false
+                }]
+            }
+        });
+
+        // Booking Trends Chart
+        var ctx2 = document.getElementById('bookingChart').getContext('2d');
+        var bookingChart = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Single', 'Double', 'Suite'],
+                datasets: [{
+                    label: 'Bookings',
+                    data: [50, 75, 30],
+                    backgroundColor: ['red', 'green', 'blue']
+                }]
+            }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
