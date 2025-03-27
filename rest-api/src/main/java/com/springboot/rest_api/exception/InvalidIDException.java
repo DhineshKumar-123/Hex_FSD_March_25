@@ -9,4 +9,8 @@ public class InvalidIDException extends RuntimeException
 		super();
 		this.message = message;
 	}
+	@Override
+	public String getMessage() {
+		return message;
+	}
 }

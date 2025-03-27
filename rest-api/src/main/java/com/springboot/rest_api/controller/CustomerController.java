@@ -3,12 +3,14 @@ package com.springboot.rest_api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springboot.rest_api.dto.MessageResponseDto;
 import com.springboot.rest_api.exception.InvalidIDException;
 import com.springboot.rest_api.model.Customer;
 import com.springboot.rest_api.service.CustomerService;
@@ -16,8 +18,14 @@ import com.springboot.rest_api.service.CustomerService;
 @RestController
 public class CustomerController
 {
+
+    private final MessageResponseDto messageResponseDto;
 	@Autowired
 	private CustomerService customerService;
+
+    CustomerController(MessageResponseDto messageResponseDto) {
+        this.messageResponseDto = messageResponseDto;
+    }
 	
 	@GetMapping("/api/customer/hello")//Just for get or show the details
 	public String sayHello()
@@ -41,19 +49,29 @@ public class CustomerController
 	}
 	
 	@GetMapping("/api/customer/getone/{id}")
-	public Customer getSingleCustomer(@PathVariable int id)
+	public ResponseEntity<?> getSingleCustomer(@PathVariable int id,MessageResponseDto messageDto)
 	{
 		try
 		{
 			Customer customer = customerService.getSingleCustomer(id);
-			return customer;
+			return ResponseEntity.ok(customer);
 		}
 		catch(InvalidIDException e)
 		{
-			
+			messageDto.setBody(e.getMessage());
+			messageDto.setStatusCode(400);
+			return ResponseEntity.status(400).body(messageDto);
 		}
-		return null;
+//		return null;
 		
 	}
+
+	public MessageResponseDto getMessageResponseDto() {
+		return messageResponseDto;
+	}
+
+//	public MessageResponseDto getMessageResponseDto() {
+//		return messageResponseDto;
+//	}
 
 }
