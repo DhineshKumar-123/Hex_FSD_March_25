@@ -12,11 +12,15 @@ public class Customer //This automatically takes as the table name
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int id;//findbyid is the inbuilt method in springboot
 	@Column(nullable = false)
-	private String name;
+	private String name;//findbyname we should declare in the repository
 	@Column(nullable = false)
-	private String contact;
+	private String contact;//same as findbyname
+	
+	private boolean isActive=true;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -34,6 +38,12 @@ public class Customer //This automatically takes as the table name
 	}
 	public void setContact(String contact) {
 		this.contact = contact;
+	}
+	public boolean isActive() {
+		return isActive;
+	}
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 	
 	
