@@ -3,6 +3,8 @@ package com.springboot.rest_api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,9 +50,10 @@ public class CustomerController
 	}
 	
 	@GetMapping("/api/customer/getall")
-	public List<Customer> getAllCustomer()
+	public List<Customer> getAllCustomer(@RequestParam int page, @RequestParam int size)
 	{
-		return customerService.getAllCustomer();
+		Pageable pageable = PageRequest.of(page, size+1);//sir put +1 but no need i think
+		return customerService.getAllCustomer(pageable);
 	}
 	
 	@GetMapping("/api/customer/getone/{id}")

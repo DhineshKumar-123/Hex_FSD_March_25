@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.springboot.rest_api.exception.InvalidContactException;
 import com.springboot.rest_api.exception.InvalidIDException;
@@ -19,9 +21,9 @@ public class CustomerService {
 	{
 		return customerRepository.save(customer);
 	}
-	public List<Customer> getAllCustomer() 
+	public List<Customer> getAllCustomer(Pageable pageable) 
 	{
-		return customerRepository.findAll()//without the stream it will show all the details
+		return customerRepository.findAll(pageable).getContent()//without the stream it will show all the details
 				.parallelStream()//with stream usage it filter the active ones only
 				.filter(c->c.isActive() == true)
 				//.sorted((a,b)->b.getId() - a.getId())
