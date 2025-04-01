@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking DSS - Complete Mockup</title>
+    <!-- Link Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-hotel"></i>
+                <h2>Hotel DSS</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#dashboard" class="active"><i class="fas fa-tachometer-alt fa-fw"></i> Dashboard</a></li>
+                    <li><a href="#pricing"><i class="fas fa-dollar-sign fa-fw"></i> Pricing Analysis</a></li>
+                    <li><a href="#forecasting"><i class="fas fa-chart-line fa-fw"></i> Occupancy Forecast</a></li>
+                    <li><a href="#channel"><i class="fas fa-broadcast-tower fa-fw"></i> Channel Analysis</a></li>
+                    <li><a href="#reviews"><i class="fas fa-star-half-alt fa-fw"></i> Reviews & Satisfaction</a></li> 
+                    <li><a href="#reports"><i class="fas fa-file-alt fa-fw"></i> Reports</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <p>© 2023 Hotel DSS</p>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Decision Support Dashboard</h1>
+                <div class="user-profile">
+                     <i class="fas fa-user-circle"></i> Executive Name
+                </div>
+            </header>
+
+            <!-- ========= Dashboard Overview Section ========= -->
+            <section id="dashboard" class="content-section">
+                <h2><i class="fas fa-tachometer-alt"></i> Dashboard Overview</h2>
+                 <div class="kpi-container">
+                    <div class="kpi-card">
+                        <h3><i class="fas fa-bed"></i> Current Occupancy</h3>
+                        <p class="kpi-value">78%</p>
+                        <span class="kpi-trend up"><i class="fas fa-arrow-up"></i> +3% vs Yesterday</span>
+                    </div>
+                    <div class="kpi-card">
+                        <h3><i class="fas fa-chart-pie"></i> Projected RevPAR</h3>
+                        <p class="kpi-value">$155.50</p>
+                        <span class="kpi-trend up"><i class="fas fa-arrow-up"></i> +$5.20 vs Forecast</span>
+                    </div>
+                    <div class="kpi-card">
+                        <h3><i class="fas fa-calendar-alt"></i> Booking Pace (30d)</h3>
+                        <p class="kpi-value">65%</p>
+                        <span class="kpi-trend down"><i class="fas fa-arrow-down"></i> -5% vs Last Year</span>
+                    </div>
+                    <div class="kpi-card alert">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Comp Rate Alert</h3>
+                        <p class="kpi-value">Action Needed</p>
+                        <span class="kpi-trend">Avg. rate $15 lower</span>
+                    </div>
+                </div>
+                 <div class="chart-placeholder data-card" style="margin-top: 2rem;"> 
+                    <h4><i class="fas fa-chart-area"></i> Booking Trends (Pace vs. Last Year vs. Forecast)</h4>
+                    <div class="loading-spinner hidden"></div>
+                    <div class="chart-content">
+                        <p>[Interactive chart showing booking accumulation over time compared to benchmarks.]</p>
+                        <img src="https://via.placeholder.com/800x250.png?text=Booking+Pace+Trend+Chart" alt="Placeholder Booking Trends Chart" style="max-width:100%; height:auto; margin-top:10px;">
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========= Pricing Analysis Section ========= -->
+            <section id="pricing" class="content-section hidden">
+                <h2><i class="fas fa-dollar-sign"></i> Pricing Analysis & Recommendations</h2>
+                <form id="pricing-form" class="dss-form data-card">
+                    <div class="form-group">
+                        <label for="pricing-start-date"><i class="fas fa-calendar-day"></i> Select Start Date:</label>
+                        <input type="date" id="pricing-start-date" name="pricing-start-date" required>
+                    </div>
+                     <div class="form-group">
+                        <label for="pricing-end-date"><i class="fas fa-calendar-day"></i> Select End Date:</label>
+                        <input type="date" id="pricing-end-date" name="pricing-end-date" required>
+                    </div>
+                     <div class="form-group">
+                        <label for="room-type-filter"><i class="fas fa-door-open"></i> Room Type:</label>
+                        <select id="room-type-filter" name="room-type-filter">
+                            <option value="all">All Types</option>
+                            <option value="standard">Standard</option>
+                            <option value="deluxe">Deluxe</option>
+                            <option value="suite">Suite</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                         <i class="fas fa-search-dollar"></i>
+                         <span class="original-text">Analyze Pricing</span>
+                         <span class="loading-text" style="display: none;">Analyzing...</span>
+                    </button>
+                </form>
+
+                <div id="pricing-results" class="analysis-results data-card hidden">
+                    <div class="loading-spinner hidden"></div>
+                    <div class="results-content">
+                        <h3>Analysis for <span id="pricing-result-dates">Selected Dates</span></h3>
+                        <div class="result-grid">
+                            <div class="result-block">
+                                <h4><i class="fas fa-users"></i> Demand Forecast</h4>
+                                <p>Level: <strong id="demand-level" class="highlight">Medium</strong></p>
+                                <p>Factors: <span id="demand-factors">Standard booking patterns</span></p>
+                            </div>
+                            <div class="result-block">
+                                <h4><i class="fas fa-building"></i> Competitor Rates (Avg)</h4>
+                                <p id="competitor-rates">Hotel A: $--- | Hotel B: $--- | Hotel C: $---</p>
+                            </div>
+                             <div class="result-block recommendation"> 
+                                <h4><i class="fas fa-tags"></i> Discount Opportunities</h4>
+                                <p id="discount-recommendation">Run analysis to identify opportunities.</p>
+                            </div>
+                        </div>
+                         <div class="result-block recommendation" style="margin-top: 1rem;"> 
+                            <h4><i class="fas fa-lightbulb"></i> Rate Recommendation:</h4>
+                            <p id="rate-recommendation">Run analysis to get recommendations.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========= Occupancy Forecast Section ========= -->
+            <section id="forecasting" class="content-section hidden">
+                <h2><i class="fas fa-chart-line"></i> Occupancy Forecasting</h2>
+                 <form id="forecast-form" class="dss-form data-card">
+                    <div class="form-group">
+                         <label for="forecast-range"><i class="fas fa-calendar-week"></i> Select Forecast Horizon:</label>
+                         <select id="forecast-range" name="forecast-range">
+                             <option value="7">Next 7 Days</option>
+                             <option value="30" selected>Next 30 Days</option>
+                             <option value="90">Next 90 Days</option>
+                         </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-sync"></i>
+                        <span class="original-text">Generate Forecast</span>
+                        <span class="loading-text" style="display: none;">Generating...</span>
+                    </button>
+                </form>
+                 <div id="forecast-results" class="analysis-results data-card hidden">
+                     <div class="loading-spinner hidden"></div>
+                     <div class="results-content">
+                        <h3>Forecast for <span id="forecast-result-horizon">Next 30 Days</span></h3>
+                        <div class="table-container">
+                            <table id="forecast-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Day</th>
+                                        <th>Projected Occ (%)</th>
+                                        <th>Exp. Arrivals</th>
+                                        <th>Exp. Departures</th>
+                                        <th>Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td colspan="6">Generate forecast to see data.</td></tr>
+                                </tbody>
+                            </table>
+                        </div> 
+
+                        <div class="chart-placeholder" style="margin-top: 1.5rem;"> 
+                           <h4><i class="fas fa-wave-square"></i> Booking Pace vs. Generated Forecast</h4>
+                           <p>[Chart comparing current bookings on hand against the generated forecast for the selected horizon.]</p>
+                           <img src="https://via.placeholder.com/600x200.png?text=Pace+vs+Forecast+Chart" alt="Placeholder Pace vs Forecast Chart" style="max-width:100%; height:auto; margin-top:10px;">
+                           <p style="font-size: 0.8em; color: var(--text-muted); margin-top: 0.5rem;">*Note: Detailed booking lists contributing to trends might be accessible via drill-down (links to PMS/Booking System - not simulated here).*</p> 
+                        </div>
+                     </div>
+                 </div>
+            </section>
+
+            <!-- ========= Channel Analysis Section ========= -->
+             <section id="channel" class="content-section hidden">
+                <h2><i class="fas fa-broadcast-tower"></i> Booking Channel Analysis</h2>
+                <form id="channel-form" class="dss-form data-card">
+                    <div class="form-group">
+                        <label for="channel-period"><i class="fas fa-calendar"></i> Select Period:</label>
+                        <input type="month" id="channel-period" name="channel-period" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-filter"></i>
+                        <span class="original-text">Analyze Channels</span>
+                        <span class="loading-text" style="display: none;">Analyzing...</span>
+                    </button>
+                </form>
+
+                 <div id="channel-results" class="analysis-results data-card hidden">
+                     <div class="loading-spinner hidden"></div>
+                     <div class="results-content">
+                         <h3>Channel Performance for <span id="channel-result-period">Selected Period</span></h3>
+                         <div class="result-grid">
+                             <div class="result-block">
+                                 <h4><i class="fas fa-globe"></i> Direct Website</h4>
+                                 <p>Bookings: <span id="ch-web-bookings">--</span></p>
+                                 <p>Revenue: <span id="ch-web-revenue">$--</span></p>
+                                 <p>Conv. Rate: <span id="ch-web-conv">--%</span></p>
+                             </div>
+                             <div class="result-block">
+                                 <h4><i class="fas fa-plane-departure"></i> OTAs (Expedia, etc.)</h4>
+                                 <p>Bookings: <span id="ch-ota-bookings">--</span></p>
+                                 <p>Revenue: <span id="ch-ota-revenue">$--</span></p>
+                                 <p>Avg. Commission: <span id="ch-ota-comm">--%</span></p>
+                             </div>
+                             <div class="result-block">
+                                 <h4><i class="fas fa-phone"></i> Phone / Direct Call</h4>
+                                  <p>Bookings: <span id="ch-phone-bookings">--</span></p>
+                                 <p>Revenue: <span id="ch-phone-revenue">$--</span></p>
+                             </div>
+                         </div>
+                         <div class="chart-placeholder" style="margin-top: 1rem;">
+                             <h4><i class="fas fa-chart-pie"></i> Revenue Share by Channel</h4>
+                             <img src="https://via.placeholder.com/400x200.png?text=Channel+Revenue+Share" alt="Placeholder Chart" style="max-width:100%; height:auto; margin-top:10px;">
+                         </div>
+                     </div>
+                 </div>
+            </section>
+
+            <!-- ========= Reviews & Satisfaction Section (NEW) ========= -->
+            <section id="reviews" class="content-section hidden">
+                <h2><i class="fas fa-star-half-alt"></i> Reviews & Satisfaction Analysis</h2>
+
+                <form id="reviews-form" class="dss-form data-card">
+                     <div class="form-group">
+                        <label for="reviews-start-date"><i class="fas fa-calendar-day"></i> Start Date:</label>
+                        <input type="date" id="reviews-start-date" name="reviews-start-date">
+                    </div>
+                     <div class="form-group">
+                        <label for="reviews-end-date"><i class="fas fa-calendar-day"></i> End Date:</label>
+                        <input type="date" id="reviews-end-date" name="reviews-end-date">
+                    </div>
+                    <div class="form-group">
+                         <label for="review-source"><i class="fas fa-globe"></i> Source:</label>
+                         <select id="review-source" name="review-source">
+                             <option value="all">All Sources</option>
+                             <option value="bookingcom">Booking.com</option>
+                             <option value="expedia">Expedia</option>
+                             <option value="tripadvisor">TripAdvisor</option>
+                             <option value="google">Google</option>
+                             <option value="internal">Internal Surveys</option>
+                         </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-sync"></i>
+                        <span class="original-text">Analyze Reviews</span>
+                        <span class="loading-text" style="display: none;">Analyzing...</span>
+                    </button>
+                </form>
+
+                <div id="reviews-results" class="analysis-results data-card hidden">
+                    <div class="loading-spinner hidden"></div>
+                    <div class="results-content">
+                        <h3>Review Summary for <span id="reviews-result-period">Selected Period</span></h3>
+                        <div class="kpi-container" style="margin-bottom: 1rem;"> 
+                            <div class="kpi-card">
+                                <h3><i class="fas fa-star"></i> Avg. Rating</h3>
+                                <p class="kpi-value" id="avg-rating">4.2<span style="font-size:0.5em">/5</span></p>
+                                <span class="kpi-trend up"><i class="fas fa-arrow-up"></i> +0.1 vs last period</span>
+                            </div>
+                             <div class="kpi-card">
+                                <h3><i class="fas fa-smile-beam"></i> Positive Sentiment</h3>
+                                <p class="kpi-value" id="positive-sentiment">85%</p>
+                                <span class="kpi-trend" >(Based on NLP analysis)</span>
+                            </div>
+                             <div class="kpi-card alert" style="border-left-color: var(--danger-color);"> 
+                                <h3><i class="fas fa-frown"></i> Negative Sentiment</h3>
+                                <p class="kpi-value" id="negative-sentiment">15%</p>
+                                <span class="kpi-trend">(Based on NLP analysis)</span>
+                            </div>
+                        </div>
+
+                        <div class="result-grid">
+                            <div class="result-block">
+                                <h4><i class="fas fa-thumbs-up"></i> Common Positive Themes</h4>
+                                <ul id="positive-themes" class="theme-list">
+                                    <li>Loading themes...</li>
+                                </ul>
+                            </div>
+                             <div class="result-block">
+                                <h4><i class="fas fa-thumbs-down"></i> Common Negative Themes</h4>
+                                <ul id="negative-themes" class="theme-list">
+                                     <li>Loading themes...</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="data-card" style="margin-top: 1.5rem; background-color: #f8f9fa;">
+                             <h4><i class="fas fa-comment-dots"></i> Recent Review Snippets (Simulated)</h4>
+                             <div id="review-snippets">
+                                 <p><em>"Excellent location right near the centre. Staff were incredibly helpful..." (Source: Booking.com, Rating: 5/5)</em></p>
+                                 <p><em>"Room was clean but the Wi-Fi was quite slow during peak hours. Breakfast was okay..." (Source: Google, Rating: 3/5)</em></p>
+                                 <p><em>"Loved our stay! The concierge gave us great tips..." (Source: Internal Survey, Rating: 5/5)</em></p>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========= Reports Section ========= -->
+            <section id="reports" class="content-section hidden">
+                <h2><i class="fas fa-file-alt"></i> Generate Reports</h2>
+                 <form id="report-form" class="dss-form data-card">
+                    <div class="form-group">
+                         <label for="report-type"><i class="fas fa-file-invoice"></i> Select Report Type:</label>
+                         <select id="report-type" name="report-type">
+                            <option value="perf">Monthly Performance Summary</option>
+                            <option value="pace">Booking Pace Report</option>
+                            <option value="channel">Booking Channel Analysis</option>
+                            <option value="los">Length of Stay (LOS) Analysis</option> 
+                            <option value="cancel">Cancellation & No-Show Report</option> 
+                            <option value="segment">Guest Segment Analysis</option>
+                            <option value="comp">Competitor Set Analysis</option>
+                         </select>
+                    </div>
+                    <div class="form-group">
+                         <label for="report-period"><i class="fas fa-calendar"></i> Select Period:</label>
+                         <input type="month" id="report-period" name="report-period" required>
+                     </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-cogs"></i> {/* Changed icon */}
+                        <span class="original-text">Generate Report</span>
+                        <span class="loading-text" style="display: none;">Generating...</span>
+                    </button>
+                </form>
+                <div id="report-output" class="analysis-results data-card hidden">
+                    <div class="loading-spinner hidden"></div>
+                    <div class="results-content">
+                        <h3>Report Generated: <span id="report-output-title">Report Title</span></h3>
+                        <p>Report for period <span id="report-output-period">Selected Period</span> is ready.</p>
+                        <div class="report-preview">
+                            <p>[Simulated report content preview will appear here.]</p>
+                            <hr style="margin: 1rem 0; border-color: var(--border-color);"> 
+                            <h4>Download Options:</h4>
+                            <a href="#" id="download-pdf-link" class="btn btn-secondary">
+                                <i class="fas fa-file-pdf"></i> Download PDF
+                            </a>
+                            <a href="#" id="download-csv-link" class="btn btn-secondary">
+                               <i class="fas fa-file-csv"></i> Download CSV
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
