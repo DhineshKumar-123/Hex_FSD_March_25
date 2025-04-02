@@ -26,10 +26,10 @@ public class Product
 	private double price=0;
 	//use the refernce for the another model (Category)
 	@ManyToOne
-	private Category category;
+	private Category category;//findByCategoryId
 	
 	@ManyToOne
-	private Vendor vendor;
+	private Vendor vendor;//findByVendorId
 	
 	@ManyToOne
 	private WareHouse wareHouse;
