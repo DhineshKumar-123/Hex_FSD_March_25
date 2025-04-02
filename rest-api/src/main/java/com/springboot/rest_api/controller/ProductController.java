@@ -14,15 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springboot.rest_api.config.GlobalExceptionHandlerConfig;
 import com.springboot.rest_api.dto.MessageResponseDto;
 import com.springboot.rest_api.exception.InvalidIDException;
 import com.springboot.rest_api.model.Category;
 import com.springboot.rest_api.model.Product;
 import com.springboot.rest_api.model.Vendor;
+import com.springboot.rest_api.model.WareHouse;
 import com.springboot.rest_api.service.CategoryService;
 import com.springboot.rest_api.service.ProductService;
 import com.springboot.rest_api.service.VendorService;
+import com.springboot.rest_api.service.WareHouseService;
 
 @RestController
 @RequestMapping("/api/product")
@@ -34,13 +35,16 @@ public class ProductController {
 	@Autowired
 	private VendorService vendorService;
 	@Autowired
+	private WareHouseService wareHouseService;
+	@Autowired
 	private MessageResponseDto dto;
 
 
-	@PostMapping("/add/{catid}/{vid}")
+	@PostMapping("/add/{catid}/{vid}/{wid}")
 	// The product is added using the category and vendor id
 	public Product addProduct(@PathVariable int catid, 
 							  @PathVariable int vid, 
+							  @PathVariable int wid,
 							  @RequestBody Product product)// here
 																												// product
 	/* we need to check whether the category is valid or not */
@@ -51,10 +55,12 @@ public class ProductController {
 		Category category = categoryService.getById(catid);
 //			return ResponseEntity.ok(category);
 		Vendor vendor = vendorService.getById(vid);
-
+		
+		WareHouse warehouse = wareHouseService.getById(wid);
 		// Attach these obj of category and vendor into product model
 		product.setCategory(category);
 		product.setVendor(vendor);
+		product.setWareHouse(warehouse);
 
 		/// Save the product object into the db
 		
