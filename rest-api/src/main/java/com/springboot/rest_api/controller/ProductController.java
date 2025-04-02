@@ -41,7 +41,7 @@ public class ProductController {
 
 
 	@PostMapping("/add/{catid}/{vid}/{wid}")
-	// The product is added using the category and vendor id
+	// The product is added using the category and vendor id and also now warehouse id
 	public Product addProduct(@PathVariable int catid, 
 							  @PathVariable int vid, 
 							  @PathVariable int wid,

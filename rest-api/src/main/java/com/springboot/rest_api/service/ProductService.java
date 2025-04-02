@@ -41,5 +41,11 @@ public class ProductService {
 		 
 		return productRepository.getProductByVendorId(vid);
 	}
+	public Product getById(int pid) throws InvalidIDException{
+		Optional<Product> optional = productRepository.findById(pid);
+		if(optional.isEmpty())
+			throw new InvalidIDException("Product Id is Invalid!!!!!");
+		return optional.get();
+	}
 
 }
