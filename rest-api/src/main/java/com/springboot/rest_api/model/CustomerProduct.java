@@ -1,9 +1,7 @@
 package com.springboot.rest_api.model;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
-import org.hibernate.annotations.ColumnDefault;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,11 +16,11 @@ public class CustomerProduct
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@ManyToOne
-	private Customer customer;
+	private Customer customer;//findByCustomerId -- this custom method 
 	@ManyToOne
-	private Product product;
+	private Product product;//findByProductId
 	
-	private LocalDate dateofpurchase;
+	private LocalDate dateofpurchase;//findByDateofPurchase
 //	@ColumnDefault(value = "1")
 	private int quantity;
 	
