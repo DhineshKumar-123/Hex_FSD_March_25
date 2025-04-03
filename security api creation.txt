@@ -1,0 +1,32 @@
+pom.xml add dependency as security (everything gets blocked)
+we can unblock by (exclude = securityautoconfiguration.class) in  mainapplication
+One Filter is created before of our spring app
+We create bean of securityfilterchain
+--rules of api calls
+
+--Auth Manager to point to DB
+   authencticationProvider(getAuth())
+   @bean
+	we need to create getAuth() method
+//1--Then we need to create the encoder for the password uding BCryptPasswordEncoder
+dao.setPassworedEncoder(passEncoder());
+//2--take spring to my sweervice which has method to take it to db, basically i am taking spring to my db
+
+not: spring needs the user model class to be userDetails type
+class User implements UserDetails -- User is-a UserDetails(is a relation)
+reason:--we then get to convert our roles in to authorities that spring wants
+
+Note:: ensure that your passwords are saed in encoded format in Db
+//this is the line
+//String ecodedPass = brypt.encode(user.getPassword());
+
+
+
+
+
+
+
+
+
+
+

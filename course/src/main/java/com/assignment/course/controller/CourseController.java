@@ -21,6 +21,17 @@ public class CourseController
 	@Autowired
 	CourseService courseService;
 	
+	@GetMapping("/api/course/public/welcome")
+	public String welcomeallUsers()
+	{
+		return "Welcome to our Courses !!!";
+	}
+	@GetMapping("/api/course/private/welcome")
+	public String welcomePrivateUsers()
+	{
+		return "Welcome to our Courses you enrolled Java,Python. Here we go!!!!!";
+	}
+	
 	@PostMapping("/api/course/add")
 	public Course addCourse(@RequestBody Course course)//this @requestbody is to get the request and give it to the Customer Model
 	{
