@@ -34,10 +34,16 @@ public class CustomerController
 //        this.messageResponseDto = messageResponseDto;
 //    }
 //	
-	@GetMapping("/api/customer/hello")//Just for get or show the details
-	public String sayHello()
+	@GetMapping("/api/customer/public/hello")//Just for get or show the details
+	public String sayPublicHello()
 	{
-		return "Hello from the First api in Springboot !!!!!!!";
+		return "Hello from the First api in Springboot in Public !!!!!!!!";
+	}
+	
+	@GetMapping("/api/customer/private/hello")//Just for get or show the details
+	public String sayPrivateHello()
+	{
+		return "Hello from the First api in Springboot inn Private  !!!!!!!!";
 	}
 	
 	@PostMapping("/api/customer/add")//it is to send the details to db which are come from postman via this api
