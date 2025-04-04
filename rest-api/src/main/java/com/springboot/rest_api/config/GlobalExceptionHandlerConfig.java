@@ -1,5 +1,7 @@
 package com.springboot.rest_api.config;
 
+import java.io.IOException;
+
 import org.springframework.http.HttpStatusCode;
 import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,6 +20,16 @@ public class GlobalExceptionHandlerConfig //This is to prevent the developer to 
 	}
 	@ExceptionHandler(InvalidUsernameException.class)
 	public ErrorResponse invalidUsernameExceptionHandler(InvalidUsernameException e)
+	{
+		return ErrorResponse.create(e,HttpStatusCode.valueOf(400),e.getMessage());
+	}
+	@ExceptionHandler(IOException.class)
+	public ErrorResponse invalidIOExceptionHandler(IOException e)
+	{
+		return ErrorResponse.create(e,HttpStatusCode.valueOf(400),e.getMessage());
+	}
+	@ExceptionHandler(RuntimeException.class)
+	public ErrorResponse invalidFileFormatExceptionHandler(RuntimeException e)
 	{
 		return ErrorResponse.create(e,HttpStatusCode.valueOf(400),e.getMessage());
 	}

@@ -1,5 +1,6 @@
 package com.springboot.rest_api.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.springboot.rest_api.dto.MessageResponseDto;
 import com.springboot.rest_api.exception.InvalidIDException;
@@ -41,6 +43,9 @@ public class ProductController {
 
 
 	@PostMapping("/add/{catid}/{vid}/{wid}")
+	//while the product is adding we are not sure about the image to be uploaded
+	//this is because if the image uploading is fails the total product add will get collapsed
+	//so that we are creating the new api for image or file uploading
 	// The product is added using the category and vendor id and also now warehouse id
 	public Product addProduct(@PathVariable int catid, 
 							  @PathVariable int vid, 
@@ -97,6 +102,17 @@ public class ProductController {
 			dto.setStatusCode(400);
 			return ResponseEntity.status(400).body(dto);
 		}
-
 	}
+	
+	@PostMapping("/image/upload/{pid}")//pid is product ID
+	public Product uploadImage(@PathVariable int pid,
+			 					@RequestParam MultipartFile file) throws IOException, InvalidIDException// This is for the use of file handling
+	{
+		return productService.uploadImage(file,pid);
+	}
+	
+	
+	
+	
+	
 }
