@@ -19,6 +19,8 @@ public class MyUserService implements UserDetailsService
 	 * This is for validating whether the user exist or not in the db */
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		return authRepository.findByUsername(username);
+	
+//		note that security config needs UserDetailsService
 	}
 
 }

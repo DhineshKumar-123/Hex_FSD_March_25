@@ -32,6 +32,7 @@ public class SecurityConfig
 				.requestMatchers("/api/customer/public/hello").permitAll()//This permitAll Will permits all the users
 				.requestMatchers("/api/customer/private/hello").authenticated()//while this will only permits the authorized users
 				.requestMatchers("/api/auth/signup").permitAll()//This enables the new user to access the signup page without any authentication
+				.requestMatchers("/api/auth/login").permitAll()
 				.anyRequest().authenticated()//if any other requests are given from the unauthorized on it will shows the 401 unauthorized error to them
 			)
 			.authenticationProvider(getAuth())
