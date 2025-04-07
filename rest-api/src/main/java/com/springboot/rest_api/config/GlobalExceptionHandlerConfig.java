@@ -33,5 +33,12 @@ public class GlobalExceptionHandlerConfig //This is to prevent the developer to 
 	{
 		return ErrorResponse.create(e,HttpStatusCode.valueOf(400),e.getMessage());
 	}
+	@ExceptionHandler(Exception.class)
+	 public ErrorResponse exceptionHandler(Exception e) {
+		 return ErrorResponse.create
+				 			(e, 
+				 			HttpStatusCode.valueOf(400), 
+				 			e.getMessage()); 
+	 }
 
 }
