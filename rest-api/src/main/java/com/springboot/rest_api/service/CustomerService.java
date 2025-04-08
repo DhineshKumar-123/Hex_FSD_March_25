@@ -55,5 +55,12 @@ public class CustomerService {
 	public List<Customer> getByIsActive(boolean status) {
 		return customerRepository.findByIsActive(status);
 	}
+	public void deleteAllInactiveCustomer() 
+	{
+		// First step is to fetch the inactive customers list
+		List<Customer> list = customerRepository.findByIsActive(false);
+		//then deleteall the list of customers
+		customerRepository.deleteAll(list);
+	}
 
 }
