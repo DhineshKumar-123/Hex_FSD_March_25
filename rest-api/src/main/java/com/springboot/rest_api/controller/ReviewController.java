@@ -64,7 +64,7 @@ public class ReviewController
 	@PostMapping("/add-review/{pid}")
 	public Review postReview(@PathVariable int pid,
 							Principal principal,
-							Review review
+							@RequestBody Review review
 							)
 	{
 		String username =principal.getName();

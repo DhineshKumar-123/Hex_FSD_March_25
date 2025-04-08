@@ -16,6 +16,7 @@ public class ReviewService {
 	private ReviewRepository reviewRepository;
 	@Autowired
 	private CustomerProductService customerProductService;
+	
 	public Review addReview(Review review) 
 	{
 		
@@ -32,13 +33,13 @@ public class ReviewService {
 	{
 		return reviewRepository.findAll();
 	}
-	public boolean checkIfProductBought(Customer customer, Product product) {
-		List<Customer> list 
-		= customerProductService.getCustomerByProductId(product.getId());
-List<Integer> custIdList = list.stream().map(c->c.getId()).toList();
 
-if(custIdList.contains(customer.getId()))
-	return true;
+	public boolean checkIfProductBought(Customer customer, Product product) {
+		List<Customer> list = customerProductService.getCustomerByProductId(product.getId());
+		List<Integer> custIdList = list.stream().map(c -> c.getId()).toList();
+
+		if (custIdList.contains(customer.getId()))
+			return true;
 
 		return false;
 	}

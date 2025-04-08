@@ -48,7 +48,7 @@ public class SecurityConfig
 				.requestMatchers("/api/product/image/upload/{pid}").hasAnyAuthority("VENDOR","ADMIN")
 				.requestMatchers("/api/customer/batch-insert").hasAnyAuthority("ADMIN","USER")
 				.requestMatchers("/api/customer/product/purchase/{cid}/{pid}").permitAll()
-				.requestMatchers("/api/review/add-review/{pid}").hasAnyAuthority("CUSTOMER","USER")
+				.requestMatchers("/api/review/add-review/{pid}").hasAnyAuthority("CUSTOMER")
 				.requestMatchers("/api/review/getall-reviews").permitAll()
 				
 				
