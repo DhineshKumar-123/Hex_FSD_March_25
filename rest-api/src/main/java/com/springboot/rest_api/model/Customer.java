@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 @Entity
 
@@ -20,6 +21,15 @@ public class Customer //This automatically takes as the table name
 	
 	private boolean isActive=true;
 	
+	@OneToOne
+	private User user;
+	
+	public Customer(String name, String contact, User user) {
+		super();
+		this.name = name;
+		this.contact = contact;
+		this.user = user;
+	}
 	
 	public int getId() {
 		return id;
@@ -45,6 +55,13 @@ public class Customer //This automatically takes as the table name
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 	
 	
 	

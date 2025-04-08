@@ -1,5 +1,6 @@
 package com.springboot.rest_api.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +15,19 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.springboot.rest_api.dto.MessageResponseDto;
 import com.springboot.rest_api.exception.InvalidContactException;
 import com.springboot.rest_api.exception.InvalidIDException;
+import com.springboot.rest_api.exception.InvalidUsernameException;
 import com.springboot.rest_api.model.Customer;
 import com.springboot.rest_api.service.CustomerService;
 
 @RestController
 public class CustomerController
 {
+
 
 	@Autowired
     private MessageResponseDto messageDto;
@@ -162,6 +166,13 @@ public class CustomerController
 	{
 		customerService.deleteAllInactiveCustomer();
 		return ResponseEntity.ok("Inactive Users Deleted Succesfully");
+	}
+	
+	@PostMapping("/api/customer/batch-insert")
+	public ResponseEntity<?> addCustomersFromExcel(@RequestParam MultipartFile file) throws IOException, InvalidUsernameException
+	{
+		customerService.addCustomersFromExcel(file);
+		return ResponseEntity.ok("Customers from excel added to DB");
 	}
 
 

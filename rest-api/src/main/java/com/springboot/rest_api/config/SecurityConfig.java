@@ -43,9 +43,12 @@ public class SecurityConfig
 				.requestMatchers("/api/auth/signup").permitAll()//This enables the new user to access the signup page without any authentication
 				.requestMatchers("/api/auth/login").authenticated()
 				.requestMatchers("/api/customer/add").permitAll()
-				.requestMatchers("/api/customer/soft-delete/{id}").hasAnyAuthority("ADMIN")
-				.requestMatchers("/api/customer/delete-all-inactive").hasAnyAuthority("ADMIN")
+				.requestMatchers("/api/customer/soft-delete/{id}").hasAuthority("ADMIN")//only admin can do this jobs
+				.requestMatchers("/api/customer/delete-all-inactive").hasAuthority("ADMIN")
 				.requestMatchers("/api/product/image/upload/{pid}").hasAnyAuthority("VENDOR","ADMIN")
+				.requestMatchers("/api/customer/batch-insert").hasAnyAuthority("ADMIN","USER")
+				
+				
 				.anyRequest().authenticated()//if any other requests are given from the unauthorized on it will shows the 401 unauthorized error to them
 				
 					

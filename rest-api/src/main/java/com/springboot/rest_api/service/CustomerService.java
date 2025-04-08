@@ -1,22 +1,33 @@
 package com.springboot.rest_api.service;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.springboot.rest_api.exception.InvalidContactException;
 import com.springboot.rest_api.exception.InvalidIDException;
+import com.springboot.rest_api.exception.InvalidUsernameException;
 import com.springboot.rest_api.model.Customer;
+import com.springboot.rest_api.model.User;
 import com.springboot.rest_api.repository.CustomerRepository;
 
 @Service
 public class CustomerService {
 	@Autowired
 	private CustomerRepository customerRepository;
+	
+	@Autowired
+	private AuthService authService;
+	
 	public Customer addCustomer(Customer customer)
 	{
 		return customerRepository.save(customer);
@@ -61,6 +72,42 @@ public class CustomerService {
 		List<Customer> list = customerRepository.findByIsActive(false);
 		//then deleteall the list of customers
 		customerRepository.deleteAll(list);
+	}
+	public void addCustomersFromExcel(MultipartFile file) throws IOException, InvalidUsernameException {
+		InputStream ins = file.getInputStream();
+		 /*Convert input stream of file into reader that u can read the file */
+		BufferedReader br = new BufferedReader(new InputStreamReader(ins));
+		//System.out.println(br.lines().count()); This will shows how many lines are there in excel
+		String line; 
+		int linesToDelete = 1; 
+		//ignore the first line which contains teh heading
+		for(int i=0;i<linesToDelete;i++) {
+			br.readLine();
+		}
+		List<Customer> list = new ArrayList<>();
+		/*When there is no line to read, line becomes null and exits the loop */
+		while((line = br.readLine()) != null) {
+			//System.out.println(line);
+			String[] fields  = line.split(",");//splitting the fetched values by (,)
+			String name = fields[1];
+			String contact = fields[2];
+			String username = fields[3];
+			String password = fields[4];
+			
+			User user = new User(username,password, "CUSTOMER");
+			/* save user in DB , because user needs id to be complete 
+				before attaching to 
+			 */
+			user = authService.signUp(user);
+			Customer customer = new Customer (name,contact,user); 
+			list.add(customer);
+		}
+		/*After this loop , we have list of customers 
+		 * having users attached for login*/
+		
+		/*Use saveAll - Batch insert to save them all in DB */
+		customerRepository.saveAll(list);
+		
 	}
 
 }

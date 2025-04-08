@@ -18,6 +18,7 @@ import jakarta.persistence.Table;
 @Table(name = "user_info")
 public class User implements UserDetails
 {
+
 	private static final long serialVersionUID = -5343366074188576573L;
 
 	@Id
@@ -31,6 +32,22 @@ public class User implements UserDetails
 	private String password;//findByUserPassword 
 	
 	private String role;
+	
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	
+//This is to call when we load the excel we are pass the data from excel to user table
+	public User(String username, String password, String role) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.role = role;
+	}
+
+
 
 	public int getId() {
 		return id;
