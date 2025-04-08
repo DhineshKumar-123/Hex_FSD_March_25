@@ -109,5 +109,9 @@ public class CustomerService {
 		customerRepository.saveAll(list);
 		
 	}
+	public Customer getByUsername(String username) {
+		 
+		return customerRepository.findByUserUsername(username);
+	}
 
 }

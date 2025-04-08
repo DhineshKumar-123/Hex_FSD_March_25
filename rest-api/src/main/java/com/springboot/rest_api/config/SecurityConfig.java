@@ -47,6 +47,9 @@ public class SecurityConfig
 				.requestMatchers("/api/customer/delete-all-inactive").hasAuthority("ADMIN")
 				.requestMatchers("/api/product/image/upload/{pid}").hasAnyAuthority("VENDOR","ADMIN")
 				.requestMatchers("/api/customer/batch-insert").hasAnyAuthority("ADMIN","USER")
+				.requestMatchers("/api/customer/product/purchase/{cid}/{pid}").permitAll()
+				.requestMatchers("/api/review/add-review/{pid}").hasAnyAuthority("CUSTOMER","USER")
+				.requestMatchers("/api/review/getall-reviews").permitAll()
 				
 				
 				.anyRequest().authenticated()//if any other requests are given from the unauthorized on it will shows the 401 unauthorized error to them

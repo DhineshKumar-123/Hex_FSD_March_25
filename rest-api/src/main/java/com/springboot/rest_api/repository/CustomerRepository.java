@@ -15,4 +15,5 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer>
 	//List<Customer> findByName(String name);
 	List<Customer> findByContact(String contact);//this is the userdefined method
 	List<Customer> findByIsActive(boolean status);
+	Customer findByUserUsername(String username);
 }

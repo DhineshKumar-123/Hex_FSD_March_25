@@ -31,6 +31,13 @@ public class Customer //This automatically takes as the table name
 		this.user = user;
 	}
 	
+	
+	public Customer() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
 	public int getId() {
 		return id;
 	}

@@ -1,5 +1,6 @@
 package com.springboot.rest_api.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class ReviewController
 	@Autowired
 	private ProductService productService;
 	
-	@PostMapping("/{cid}/{pid}")
+	@PostMapping("/{cid}/{pid}")//with user id
 	public Review addReview(@PathVariable int cid,
 						    @PathVariable int pid,
 						    @RequestBody Review review) 
@@ -51,6 +52,32 @@ public class ReviewController
 	public List<Review> getReviewsByCustomerId(@PathVariable int cid){
 		
 		return reviewService.getReviewsByCustomerId(cid); 
+	}
+	
+	//Get all reviews
+	@GetMapping("/getall-reviews")
+	public List<Review> getAllReviews()
+	{
+		return reviewService.getAllReviews();
+	}
+	
+	@PostMapping("/add-review/{pid}")
+	public Review postReview(@PathVariable int pid,
+							Principal principal,
+							Review review
+							)
+	{
+		String username =principal.getName();
+		Customer customer = customerService.getByUsername(username);
+		Product product = productService.getById(pid);
+		review.setProduct(product);
+		review.setCustomer(customer);
+		boolean isBought = reviewService.checkIfProductBought(customer,product);
+		if(!isBought) {
+			throw new RuntimeException("Customer has not bought the product, so review not allowed");
+		}
+		
+		return reviewService.addReview(review);
 	}
 
 }
