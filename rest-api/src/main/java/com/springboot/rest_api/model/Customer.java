@@ -36,6 +36,17 @@ public class Customer //This automatically takes as the table name
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+
+
+	public Customer(int id, String name, String contact, boolean isActive, User user) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.contact = contact;
+		this.isActive = isActive;
+		this.user = user;
+	}
 
 
 	public int getId() {

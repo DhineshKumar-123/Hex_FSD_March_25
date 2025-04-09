@@ -52,7 +52,7 @@ public class SecurityConfig
 				.requestMatchers("/api/review/getall-reviews").permitAll()
 				
 				
-				.anyRequest().authenticated()//if any other requests are given from the unauthorized on it will shows the 401 unauthorized error to them
+				.anyRequest().permitAll()//if any other requests are given from the unauthorized on it will shows the 401 unauthorized error to them
 				
 					
 				)
