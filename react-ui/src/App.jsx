@@ -29,6 +29,13 @@ function App()
     setEmail("johnaa@gmail.com")
     setContact("9632587410")
   }
+  const manager = ()=>
+    {
+      setName("Emma")
+      setEmail("emma@gmail.com")
+      setContact("6359635696")
+    }
+  
 
   return(
     <div>
@@ -50,7 +57,8 @@ function App()
       </p>
       <hr /> */}
 
-      <button onClick={()=> {populate()} }>Click here to see the Details of the below attributes </button>
+      <button onClick={()=> {populate()} }>Click here to see the Details of the Employee </button>
+      <button onClick={()=> {manager()} }>Click here to see the Details of the Manager </button>
       <p>
         Name : {name} <br />
         E-Mail : {email} <br />
