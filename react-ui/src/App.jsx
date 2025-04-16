@@ -1,9 +1,14 @@
+import { useState } from 'react'
 import './App.css'
 
 function App()
 {//App is a component and this must have a return 
 
-  let name = "John Doe"
+  let [name] = useState("John Doe");
+  // if we want to set the differnet values for the declared variables within a fuction we need to use usestate and setname or set keyword
+
+  let[msg,setmsg] = useState("");
+
   const age = 50
 
 //let can be updated when we need to modify
@@ -13,6 +18,17 @@ let x = 20
 let y = 50
 
 let percentage = 100
+
+//create a function for clicking button
+function btnclick()
+{
+  // alert("You Clicked Me I am Here to assist you!!!!")
+  // console.log("You clicked me I am Here in the Console")
+
+  setmsg("I have been Clicked by you and you generated me !!!!")
+}
+
+
   return(
     <div>
       <h1>React App Vite</h1>
@@ -39,6 +55,9 @@ let percentage = 100
         }
       </p>
       <hr />
+
+      <button onClick={()=>btnclick()}>Click here to see the Different </button>
+      <p>{msg}</p>
 
     </div>
   )
