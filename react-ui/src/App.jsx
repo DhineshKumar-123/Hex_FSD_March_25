@@ -4,10 +4,10 @@ import './App.css'
 function App()
 {//App is a component and this must have a return 
 
-  let [name] = useState("John Doe");
+  let [name] = useState('John Doe');
   // if we want to set the differnet values for the declared variables within a fuction we need to use usestate and setname or set keyword
 
-  let[msg,setmsg] = useState("");
+  let[msg,setMsg] = useState('');
 
   const age = 50
 
@@ -20,12 +20,12 @@ let y = 50
 let percentage = 100
 
 //create a function for clicking button
-function btnclick()
+const btnclick = ()=>
 {
   // alert("You Clicked Me I am Here to assist you!!!!")
   // console.log("You clicked me I am Here in the Console")
 
-  setmsg("I have been Clicked by you and you generated me !!!!")
+  setMsg("I have been Clicked by you and you generated me !!!!")
 }
 
 
