@@ -59,7 +59,7 @@ public class CustomerService {
 		
 	}
 	public List<Customer> getAllCustomersByContact(String contact) {
-		if(contact.length() != 8)//this must be ten but i have given the digits as mixed in db
+		if(contact.length() != 10)//this must be ten but i have given the digits as mixed in db
 			throw new InvalidContactException("Contact number invalid and must be 10 digits!!!");
 		return customerRepository.findByContact(contact);
 	}
@@ -73,7 +73,8 @@ public class CustomerService {
 		//then deleteall the list of customers
 		customerRepository.deleteAll(list);
 	}
-	public void addCustomersFromExcel(MultipartFile file) throws IOException, InvalidUsernameException {
+	public void addCustomersFromExcel(MultipartFile file) throws IOException, InvalidUsernameException 
+	{
 		InputStream ins = file.getInputStream();
 		 /*Convert input stream of file into reader that u can read the file */
 		BufferedReader br = new BufferedReader(new InputStreamReader(ins));
@@ -81,12 +82,14 @@ public class CustomerService {
 		String line; 
 		int linesToDelete = 1; 
 		//ignore the first line which contains teh heading
-		for(int i=0;i<linesToDelete;i++) {
+		for(int i=0;i<linesToDelete;i++) 
+		{
 			br.readLine();
 		}
 		List<Customer> list = new ArrayList<>();
 		/*When there is no line to read, line becomes null and exits the loop */
-		while((line = br.readLine()) != null) {
+		while((line = br.readLine()) != null) 
+		{
 			//System.out.println(line);
 			String[] fields  = line.split(",");//splitting the fetched values by (,)
 			String name = fields[1];
