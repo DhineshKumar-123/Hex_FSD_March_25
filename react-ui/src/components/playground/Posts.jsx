@@ -8,27 +8,11 @@ function Post()
 
     useEffect(()=>
     {
-        const getPosts = () =>
+        const getPosts = () =>//this is the method or function within the Use Effect
         {
-            let post1 = {
-                "userId": 1,
-                "id": 1,
-                "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-                "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
-            }
-            let post2 = {
-                "userId": 1,
-                "id": 2,
-                "title": "qui est esse",
-                "body": "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
-            }
-            //we need to push the post object above to the Array named as Temp
-            let temp = [];
-            temp.push(post1);
-            temp.push(post2);
-
-            //Assigining the Temp array into the already defined Post Array
-            SetPosts(temp);
+            fetch("https://jsonplaceholder.typicode.com/posts")
+            .then(response => response.json())
+            .then(data => SetPosts(data))
         }
 
         getPosts();//Calling the Created function to activate that and it is more Important
