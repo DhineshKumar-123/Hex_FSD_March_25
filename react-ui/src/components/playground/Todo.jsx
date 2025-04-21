@@ -1,25 +1,47 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 
 function Todo ()
 {
+    const url ='https://jsonplaceholder.typicode.com/todos';
     
     const[todos,setTodo] = useState([]);
     useEffect(()=>{
         const getTodos = () => {
-            fetch('https://jsonplaceholder.typicode.com/todos')
+            fetch(url)
                 .then(resp => resp.json())
                 .then(data => setTodo(data))
                 .catch(err => {
                     console.log(err)
                 })
         }
-        getTodos();
-    },[])
+        //CREATING THE GET TODOS FUNCTION USING Async & AXIOS
+        const getTodosWithAxios = async () =>
+            {
+                try{
+                    let response = await axios.get(url);
+                    setTodo(response.data);//this response itself having the entries in the data json format so dont need to change it into json
+        
+                }
+                catch(err)
+                {
+                    console.log(err);
+                }
+                finally
+                {
+                    //this is the default one for every execution
+                }
+        
+            }
+        // getTodos();
+        getTodosWithAxios();
+
+    }, [])
+
 
     // This is function to delete the id from the web render
     //this needs the id for that data to be deleted from there 
     // here there are some tricks we have played
-
     const deleteTodo = (todoId) =>
     {
 
