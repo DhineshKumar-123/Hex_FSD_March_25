@@ -1,8 +1,7 @@
 package com.springboot.rest_api.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +19,9 @@ public class StudentService
 		return studentRepository.save(student);
 	}
 
-	public List<Student> getAll(Pageable pageable) 
+	public Page<Student> getAll(Pageable pageable) //Instead of list of students it returns the page of students
 	{
-		return studentRepository.findAll(pageable).getContent();
+		return studentRepository.findAll(pageable);
 	}
 
 }
