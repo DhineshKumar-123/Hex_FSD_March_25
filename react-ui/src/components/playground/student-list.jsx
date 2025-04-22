@@ -101,7 +101,7 @@ function StudentList() {
                                 {
                                     pageArry.map((e, index) => (
                                         <li key={index} className="page-item"><a className="page-link" href="#"
-                                             >{index}</a></li>
+                                            onClick={() => { setPage(e + 1) }} >{index + 1}</a></li>
                                     ))
                                 }
 
