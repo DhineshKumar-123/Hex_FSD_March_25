@@ -37,7 +37,7 @@ function StudentAdd () {
                         onChange={($event) => { setName($event.target.value) }} />
                 </div>
                 <div className="mb-4">
-                    <label>Enter Email: </label>
+                    <label>Enter Student Email: </label>
                     <input type="text"
                         onChange={($event) => { setEmail($event.target.value) }} ></input>
                 </div>
