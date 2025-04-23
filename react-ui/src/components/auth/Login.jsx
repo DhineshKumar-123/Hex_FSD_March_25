@@ -1,5 +1,6 @@
 import { useState } from "react";
 import users from "../../data/users";
+import { useNavigate } from "react-router";
 
 function Login ()
 {
@@ -9,6 +10,7 @@ function Login ()
     const[msgUsername,setMsgUsername] = useState(null);
     const[msgPassword,setMsgPassword] = useState(null);
     const[userData,setUserData] = useState(users);
+    const navigate = useNavigate();
     
 
     const login = ()=>
@@ -38,8 +40,21 @@ function Login ()
             userData.forEach(u => {
                 if(u.username === username && u.password === password )
                 {
-                    alert("U are legit and your role is " + u.role);
-                    isCorrect(true)
+                    isCorrect = true;
+                    switch (u.role) {
+                        case 'CUSTOMER':
+                            //navigate to employee dashboard
+                            navigate("/customer")
+                            break;
+                        case 'VENDOR':
+                            //navigate to vendor dashboard
+                            break;
+                        case 'EXECUTIVE':
+                            //navigate to executive dashboard
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 if(isCorrect === false)
                 {
