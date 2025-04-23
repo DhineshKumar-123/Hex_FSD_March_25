@@ -1,6 +1,24 @@
+import { useEffect, useState } from "react";
 import CustomerNavBar from "./Navbar";
+import axios from "axios";
 
 function CustomerDashboard() {
+
+    const [categories,setCategories] = useState([])
+
+    useEffect(()=>{
+        const getAllCategories = async () =>
+        {
+            try{
+                const response = await axios.get("http://localhost:8080/api/category/getall")
+            setCategories(response.data)
+            }
+            catch(err){
+                console.log(err);
+            }
+        }
+        getAllCategories();
+    },[])
 
     return (
 
@@ -12,7 +30,22 @@ function CustomerDashboard() {
             </div>
             <div className="row">
                 <div className="col-lg-12">
-                    ---customer components go here....
+                 <div className="row">
+                 {
+                    categories.map((c, index)=>(
+                        <div className="col-sm-3" key={index}>
+                            <div className="card">
+                                <div className="card-body">
+                                    {c.name}
+                                </div>
+
+                            </div>
+
+                        </div>
+                    ))
+                 }
+
+                 </div>
                 </div>
             </div>
 
