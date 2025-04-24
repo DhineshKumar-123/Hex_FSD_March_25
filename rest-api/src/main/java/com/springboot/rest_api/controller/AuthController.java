@@ -5,7 +5,9 @@ import java.security.Principal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,10 +20,10 @@ import com.springboot.rest_api.exception.InvalidUsernameException;
 import com.springboot.rest_api.model.User;
 import com.springboot.rest_api.service.AuthService;
 import com.springboot.rest_api.service.MyUserService;
-import org.springframework.security.core.Authentication;
 
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin(origins = "http://localhost:5173")
 public class AuthController 
 {
 	@Autowired
@@ -42,7 +44,7 @@ public class AuthController
 		return authService.signUp(user);		
 	}
 	
-	@PostMapping("/login")
+	@GetMapping("/login")
 	public UserDetails login(Principal principal)//we are redirecting the user logged in to their concerned dashboard according to their role
 	{
 		/* Make this login as Authenticated API 
