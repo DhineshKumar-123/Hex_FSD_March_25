@@ -2,7 +2,7 @@ import { useState } from "react";
 import users from "../../data/users";
 import { useNavigate } from "react-router";
 import axios from "axios";
-
+import { Link } from "react-router";
 function Login() {
 
     const [username, setUsername] = useState(null);
@@ -147,6 +147,8 @@ function Login() {
                             </div>
                             <div className="card-footer">
                                 Don't have an Account? Sign Up <br />
+                                <Link to="/customer/signup"> Sign Up as Customer </Link> <br />
+                                Sign Up as Seller <br />
                                 Forgot Password
                             </div>
                         </div>

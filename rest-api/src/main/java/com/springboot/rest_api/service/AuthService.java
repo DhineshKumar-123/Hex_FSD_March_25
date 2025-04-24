@@ -24,7 +24,7 @@ public class AuthService {
 					throw new InvalidUsernameException("Username already exists");
 				}
 		if(user.getRole()==null) 
-			user.setRole("USER_DEFAULT");
+			user.setRole(user.getRole());
 		
 		//encode the password for security purpose
 		String encodedPass = bcrypt.encode(user.getPassword());
