@@ -7,6 +7,7 @@ import Todo from "./components/playground/todo"
 import CustomerDashboard from "./components/customer/CustomerDashboard"
 import CustomerProducts from "./components/customer/product"
 import CustomerSignUp from "./components/customer/signup"
+import VendorDashboard from "./components/vendor/VendorDashboard"
 
 
 function App()
@@ -18,6 +19,7 @@ function App()
       <Route path="customer" element={<CustomerDashboard />}></Route>
       <Route path="product/:cid/:cname" element={<CustomerProducts />} />
       <Route path="/customer/signup" element={<CustomerSignUp />} />
+      <Route path="vendor" element={<VendorDashboard />} />
      </Routes>
     </div>
   )

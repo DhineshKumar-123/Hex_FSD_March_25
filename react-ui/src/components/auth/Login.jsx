@@ -65,6 +65,7 @@ function Login() {
                                 break;
                             case 'VENDOR':
                                 //navigate to vendor dashboard
+                                navigate("/vendor")
                                 break;
                             case 'ADMIN':
                                 //navigate to executive dashboard

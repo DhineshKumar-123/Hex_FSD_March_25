@@ -43,12 +43,11 @@ public class ProductController {
 	@Autowired
 	private MessageResponseDto dto;
 
-
-	@PostMapping("/add/{catid}/{vid}/{wid}")
 	//while the product is adding we are not sure about the image to be uploaded
-	//this is because if the image uploading is fails the total product add will get collapsed
-	//so that we are creating the new api for image or file uploading
-	// The product is added using the category and vendor id and also now warehouse id
+		//this is because if the image uploading is fails the total product add will get collapsed
+		//so that we are creating the new api for image or file uploading
+		// The product is added using the category and vendor id and also now warehouse id
+	@PostMapping("/add/{catid}/{vid}/{wid}")
 	public Product addProduct(@PathVariable int catid, 
 							  @PathVariable int vid, 
 							  @PathVariable int wid,
