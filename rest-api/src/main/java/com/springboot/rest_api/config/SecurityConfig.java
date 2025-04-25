@@ -50,6 +50,7 @@ public class SecurityConfig
 				.requestMatchers("/api/customer/product/purchase/{cid}/{pid}").permitAll()
 				.requestMatchers("/api/review/add-review/{pid}").hasAnyAuthority("CUSTOMER")
 				.requestMatchers("/api/review/getall-reviews").permitAll()
+				.requestMatchers("/api/product/add/{catId}/{wid}").hasAuthority("VENDOR")
 				
 				
 				.anyRequest().permitAll()//if any other requests are given from the unauthorized on it will shows the 401 unauthorized error to them

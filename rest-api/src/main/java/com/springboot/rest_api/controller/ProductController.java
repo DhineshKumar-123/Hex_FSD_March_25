@@ -1,6 +1,7 @@
 package com.springboot.rest_api.controller;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,9 +48,9 @@ public class ProductController {
 		//this is because if the image uploading is fails the total product add will get collapsed
 		//so that we are creating the new api for image or file uploading
 		// The product is added using the category and vendor id and also now warehouse id
-	@PostMapping("/add/{catid}/{vid}/{wid}")
+	@PostMapping("/add/{catid}/{wid}")//instead of getting vendor id manually we find it by using username given during the login
 	public Product addProduct(@PathVariable int catid, 
-							  @PathVariable int vid, 
+							  Principal principal, 
 							  @PathVariable int wid,
 							  @RequestBody Product product)// here
 																												// product
@@ -60,7 +61,7 @@ public class ProductController {
 		// instead of using try catch we are using the Global Exception handler
 		Category category = categoryService.getById(catid);
 //			return ResponseEntity.ok(category);
-		Vendor vendor = vendorService.getById(vid);
+		Vendor vendor = vendorService.getByUsername(principal.getName());
 		
 		WareHouse warehouse = wareHouseService.getById(wid);
 		// Attach these obj of category and vendor into product model
