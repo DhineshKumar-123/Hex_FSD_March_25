@@ -8,20 +8,32 @@ import CustomerDashboard from "./components/customer/CustomerDashboard"
 import CustomerProducts from "./components/customer/product"
 import CustomerSignUp from "./components/customer/signup"
 import VendorDashboard from "./components/vendor/VendorDashboard"
+import { useDispatch } from "react-redux"
+import { useEffect } from "react"
+import fetchAlbums from "./stores/actions/albumsActions"
+import AlbumsList from "./components/playground/albumslist"
+import ChartDashboard from "./components/playground/Dashboard"
 
 
 function App()
 {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchAlbums())
+  }, [])
+
+
+
   return(
-    <div>
      <Routes>
       <Route index path="" element={<Login />}></Route>
       <Route path="customer" element={<CustomerDashboard />}></Route>
       <Route path="product/:cid/:cname" element={<CustomerProducts />} />
       <Route path="/customer/signup" element={<CustomerSignUp />} />
       <Route path="vendor" element={<VendorDashboard />} />
+      <Route path="albums" element={<AlbumsList />} />
+      <Route path="chart-dashboard" element={<ChartDashboard />} />
      </Routes>
-    </div>
   )
 }
 

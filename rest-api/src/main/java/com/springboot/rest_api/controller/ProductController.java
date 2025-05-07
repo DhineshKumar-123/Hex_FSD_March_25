@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.springboot.rest_api.dto.BarChartDto;
 import com.springboot.rest_api.dto.MessageResponseDto;
 import com.springboot.rest_api.exception.InvalidIDException;
 import com.springboot.rest_api.model.Category;
@@ -113,7 +114,10 @@ public class ProductController {
 		return productService.uploadImage(file,pid);
 	}
 	
-	
+	@GetMapping("/bar-chart")
+	public BarChartDto getBarChartData() {
+		return productService.getBarChartData();
+	}
 	
 	
 	
